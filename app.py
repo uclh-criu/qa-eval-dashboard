@@ -11,6 +11,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize db with app
 db.init_app(app)
+
+with app.app_context():
+    db.create_all()
+    print("Database tables created if they didn't exist!")
+
 migrate = Migrate(app, db)
 
 # Initialize Flask-Login
