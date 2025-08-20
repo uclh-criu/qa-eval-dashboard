@@ -1,3 +1,5 @@
 *.csv
 *.json
 /venv
+/instance
+__pycache__
