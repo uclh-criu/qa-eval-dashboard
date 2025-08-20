@@ -2,6 +2,7 @@ from flask import Flask
 from flask_login import LoginManager
 from models import db, User
 import os
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key-change-in-production'
@@ -10,6 +11,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize db with app
 db.init_app(app)
+migrate = Migrate(app, db)
 
 # Initialize Flask-Login
 login_manager = LoginManager()
@@ -26,9 +28,9 @@ from routes import register_routes
 register_routes(app)
 
 if __name__ == '__main__':
-    with app.app_context():
-        # Create tables
-        db.create_all()
-        print("Database tables created successfully!")
+    # Removed db.create_all() as migrations will handle database creation and updates
+    # with app.app_context():
+    #    db.create_all()
+    #    print("Database tables created successfully!")
     
     app.run(debug=True)
