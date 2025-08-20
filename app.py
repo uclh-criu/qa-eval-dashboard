@@ -2,7 +2,6 @@ from flask import Flask
 from flask_login import LoginManager
 from models import db, User
 import os
-from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key-change-in-production'
@@ -16,7 +15,7 @@ with app.app_context():
     db.create_all()
     print("Database tables created if they didn't exist!")
 
-migrate = Migrate(app, db)
+# Removed Flask-Migrate initialization
 
 # Initialize Flask-Login
 login_manager = LoginManager()
