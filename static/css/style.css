@@ -213,14 +213,14 @@ body {
 #feedback-form {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 250px);
+    height: 100%;
 }
 
 .feedback-content {
     flex: 1;
     overflow-y: auto;
     padding-right: 5px;
-    max-height: calc(100vh - 350px);
+    margin-bottom: 1rem;
 }
 
 .score-slider {
