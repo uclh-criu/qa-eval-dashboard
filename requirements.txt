@@ -4,6 +4,5 @@ Flask-WTF==1.2.1
 Flask-Login==0.6.3
 WTForms==3.1.1
 Werkzeug==3.0.1
-python-dotenv==1.0.0
-gunicorn
-psycopg2-binary
+gunicorn              # Only needed for deployment on Render
+psycopg2-binary       # Only needed for deployment on Render with PostgreSQL
