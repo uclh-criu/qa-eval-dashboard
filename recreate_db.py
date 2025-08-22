@@ -17,8 +17,7 @@ def recreate_database():
         # Create all tables with new schema
         db.create_all()
         
-        print("✅ Database recreated successfully with new schema!")
-        print("🔄 The database has been reset. You can now register an admin user and upload datasets via the web interface.")
+        print("Database recreated successfully.")
 
 if __name__ == "__main__":
     recreate_database()
