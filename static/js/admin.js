@@ -29,6 +29,7 @@ function editUser(userId, username, accessLevel) {
                         </form>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-danger me-auto" onclick="deleteUser()">Delete User</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button type="button" class="btn btn-primary" onclick="saveUserChanges()">Save Changes</button>
                     </div>
@@ -47,6 +48,48 @@ function editUser(userId, username, accessLevel) {
     // Show modal
     const modal = new bootstrap.Modal(document.getElementById('editUserModal'));
     modal.show();
+}
+
+function deleteUser() {
+    const userId = document.getElementById('editUserId').value;
+    const username = document.getElementById('editUsername').value;
+
+    // Show confirmation dialog with username for clarity
+    if (!confirm(`Are you sure you want to delete the user "${username}"? This action cannot be undone.`)) {
+        return;
+    }
+
+    // Show loading state on delete button
+    const deleteBtn = document.querySelector('#editUserModal .btn-danger');
+    const originalBtnText = deleteBtn.innerHTML;
+    deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Deleting...';
+    deleteBtn.disabled = true;
+
+    fetch(`/api/admin/user/${userId}`, {
+        method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showAlert('User deleted successfully', 'success');
+            // Close modal
+            bootstrap.Modal.getInstance(document.getElementById('editUserModal')).hide();
+            // Reload the page to show updated user list
+            setTimeout(() => window.location.reload(), 1000);
+        } else {
+            showAlert(data.message || 'Error deleting user', 'error');
+            // Reset button state
+            deleteBtn.innerHTML = originalBtnText;
+            deleteBtn.disabled = false;
+        }
+    })
+    .catch(error => {
+        console.error('Error deleting user:', error);
+        showAlert('Error deleting user', 'error');
+        // Reset button state
+        deleteBtn.innerHTML = originalBtnText;
+        deleteBtn.disabled = false;
+    });
 }
 
 function saveUserChanges() {

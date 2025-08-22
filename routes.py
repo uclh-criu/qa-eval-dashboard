@@ -22,7 +22,7 @@ def admin_required(f):
 # This will be imported by app.py and the routes will be registered with the app
 def register_routes(app):
     # Admin API endpoints
-    @app.route('/api/admin/user/<int:user_id>', methods=['GET', 'PUT'])
+    @app.route('/api/admin/user/<int:user_id>', methods=['GET', 'PUT', 'DELETE'])
     @login_required
     @admin_required
     def api_admin_user(user_id):
@@ -39,6 +39,39 @@ def register_routes(app):
                     'created_at': user.created_at.isoformat() if user.created_at else None
                 }
             })
+        elif request.method == 'DELETE':
+            try:
+                # Prevent deleting the last admin user
+                if user.is_admin():
+                    admin_count = User.query.filter_by(access_level='admin').count()
+                    if admin_count <= 1:
+                        return jsonify({
+                            'success': False,
+                            'message': 'Cannot delete the last admin user'
+                        })
+
+                # Delete user's feedback
+                Feedback.query.filter_by(user_id=user.id).delete()
+                
+                # Remove user from datasets
+                for dataset in user.accessible_datasets:
+                    dataset.authorized_users.remove(user)
+                
+                # Delete the user
+                db.session.delete(user)
+                db.session.commit()
+                
+                return jsonify({
+                    'success': True,
+                    'message': 'User deleted successfully'
+                })
+            except Exception as e:
+                db.session.rollback()
+                return jsonify({
+                    'success': False,
+                    'message': f'Error deleting user: {str(e)}'
+                })
+        
         else:  # PUT
             try:
                 data = request.get_json()
