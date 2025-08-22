@@ -4,7 +4,7 @@ A web-based interface for collecting expert feedback and gold standard answers f
 
 **Demo:** [https://qa-eval-dashboard.onrender.com/](https://qa-eval-dashboard.onrender.com/)
 
-
+![Medical Q&A Feedback Interface](screenshot.PNG)
 
 ## Features
 
