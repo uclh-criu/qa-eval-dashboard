@@ -1,6 +1,6 @@
-# Medical Q&A Feedback System
+# Medical Q&A Feedback Dashboard
 
-A web-based interface for collecting expert feedback and gold standard answers for medical question answering and RAG (Retrieval-Augmented Generation) systems.
+A web-based interface for collecting expert feedback and gold standard answers for finetuning and evaluating medical Question & Answering and RAG (Retrieval-Augmented Generation) systems.
 
 **Demo:** [https://qa-eval-dashboard.onrender.com/](https://qa-eval-dashboard.onrender.com/)
 
