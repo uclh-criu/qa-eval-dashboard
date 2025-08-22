@@ -10,7 +10,7 @@ A web-based interface for collecting feedback and gold standard answers from exp
 
 - Review and provide feedback on medical Q&A pairs to support evaluation and finetuning
 - Score model answers based on accuracy, completeness, clarity, and clinical relevance
-- Provide gold standard answers for evaluation and/or finetuning
+- Provide gold standard answers
 - Dataset management for organizing Q&A collections, including upload and download functionality (with support for csv and json file formats)
 - Admin interface for user and dataset management
 
