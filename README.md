@@ -2,6 +2,8 @@
 
 A web-based interface for collecting expert feedback and gold standard answers for medical question answering and RAG (Retrieval-Augmented Generation) systems.
 
+**Demo:** [https://qa-eval-dashboard.onrender.com/](https://qa-eval-dashboard.onrender.com/)
+
 ![Medical Q&A Feedback Interface](screenshot.PNG)
 
 ## Features
